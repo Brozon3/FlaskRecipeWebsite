@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "form_macros.html" import render_field %}
 
 {% block page_title %}
     Shannon's Recipe Book
@@ -15,4 +16,26 @@
 {% endblock %}
 
 {% block H2_Content %}
+    <section>
+        <form action="" enctype="multipart/form-data" method="post">
+            {{ form.csrf_token }}
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Recipe Information</h3>
+                    <table>
+                        {{ render_field(form.recipe_name, size=20) }}
+                        {{ render_field(form.recipe_picture) }}
+                    </table>
+                </div>
+                <table>
+                    <tr class="submit">
+                        <td></td>
+                        <td>
+                            <button type="submit">Submit</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </section>
 {% endblock %}

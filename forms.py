@@ -6,5 +6,5 @@ from wtforms.validators import DataRequired, Length
 
 
 class RecipeForm(FlaskForm):
-    recipeName = StringField("Recipe Name:", validators=[DataRequired()])
-    recipePicture = FileField("Recipe Field: ", validators=[FileRequired()])
+    recipe_name = StringField("Recipe Name:", validators=[DataRequired()])
+    recipe_picture = FileField("Recipe Field: ", validators=[FileRequired()])
