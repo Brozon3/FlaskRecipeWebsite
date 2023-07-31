@@ -36,19 +36,27 @@
 
     <main>
     <br>
+
+         <div class="container-fluid">
+             <div class="row">
+                 <div class="col">
+                     <h1>{% block messages %}{% endblock %}</h1>
+                 </div>
+             </div>
+        </div>
+
         <div class="container-fluid">
-            <div class="main wrapper clearfix">
-                <article>
-                    <section>
-                        <h1>{% block H1_Description %}{% endblock %}</h1>
-                        <p>{% block H1_Content %}{% endblock %}</p>
-                    </section>
-                <br>
-                    <section>
-                        <h2>{% block H2_Description %}{% endblock %}</h2>
-                        <p>{% block H2_Content %}{% endblock %}</p>
-                    </section>
-                </article>
+            <div class="row">
+                <div class="col">
+                    <h1>{% block H1_Description %}{% endblock %}</h1>
+                    <span>{% block H1_Content %}{% endblock %}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h1>{% block H2_Description %}{% endblock %}</h1>
+                    <span>{% block H2_Content %}{% endblock %}</span>
+                </div>
             </div>
         </div>
     </main>

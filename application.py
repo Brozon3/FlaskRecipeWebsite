@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, request, flash
 from forms import RecipeForm, SearchForm
 import pandas as pd
 from werkzeug.utils import secure_filename
@@ -9,8 +9,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = "aon123xzdondfipubasdfgibf45234uasdfbipSBDFPIUBdsf"
 app.config['SUBMITTED_DATA'] = os.path.join("static", "data_dir", "")
 app.config['SUBMITTED_IMG'] = os.path.join("static", "image_dir", "")
-
-
 
 
 @app.route('/')
@@ -29,7 +27,7 @@ def add_recipe():
     form = RecipeForm()
     if form.validate_on_submit():
         recipe_name = form.recipe_name.data
-        if recipe_name not in df:
+        if recipe_name not in df.index:
             recipe_ingredients = form.recipe_ingredients.data
             recipe_instructions = form.recipe_instructions.data
             recipe_serving_size = form.recipe_serving_size.data
@@ -38,10 +36,11 @@ def add_recipe():
             form.recipe_picture.data.save(os.path.join(app.config["SUBMITTED_IMG"] + picture_filename))
             df.loc[recipe_name] = [recipe_ingredients, recipe_instructions, recipe_serving_size, picture_filename]
             df.to_csv("static/data_dir/recipes.csv")
-            return redirect(url_for("hello_world"))
+            flash("Your recipe was added to the cookbook!")
+            return redirect(url_for("add_recipe"))
         else:
-            return render_template("add_recipe.html", form=form)
-
+            flash("A recipe with that name already exists! \nTry something funnier.")
+            return redirect(url_for("add_recipe"))
     else:
         return render_template("add_recipe.html", form=form)
 
