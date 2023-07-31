@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Shannon's Recipe Book
+{% endblock %}
+
+{% block H1_Description %}
+    Please see the details for the recipe you searched below!
+{% endblock %}
+
+{% block H1_Content %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ url_for("static", filename='image_dir/{}'.format(recipe.recipe_picture)) }}" alt="">
+                </div>
+                <div class="col-md-8">
+                    <h4 class="font-weight-bold mb-0">Recipe Name: <span class="text-muted font-weight-normal">{{ recipe.recipe_name }}</span></h4>
+                    <h4 class="font-weight-bold mb-0">Recipe Ingredients: <span class="text-muted font-weight-normal">{{ recipe.recipe_ingredients }}</span></h4>
+                    <h4 class="font-weight-bold mb-0">Recipe Instructions: <span class="text-muted font-weight-normal">{{ recipe.recipe_instructions }}</span></h4>
+                    <h4 class="font-weight-bold mb-0">Recipe Serving Size: <span class="text-muted font-weight-normal">{{ recipe.recipe_serving_size }}</span></h4>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block H2_Description %}
+{% endblock %}
+
+{% block H2_Content %}
+{% endblock %}
+
+
+
+
+<h1 class="title">{% block page_title %}{% endblock %}</h1>
+            <nav>
+                <ul>
+                    <li><a href={{ url_for('hello_world') }}>Home</a></li>
+                    <li><a href={{ url_for('add_recipe') }}>Add Recipe</a></li>
+                    <li><a href={{ url_for('search_recipe') }}>Search</a></li>
+                </ul>
+            </nav>

@@ -5,10 +5,19 @@
 {% endblock %}
 
 {% block H1_Description %}
-    Search for recipes already added and get to cooking!
+    Search for recipes and get to cooking!
 {% endblock %}
 
 {% block H1_Content %}
+    <section>
+        <form method="POST" action="{{ url_for("search_recipe") }}">
+            {{ form.csrf_token }}
+            <label for="q">Enter the name of the recipe:
+                <input type="search" name="q" placeholder="Chocolate chip pancakes">
+            </label>
+            <button type="submit">Search</button>
+        </form>
+    </section>
 {% endblock %}
 
 {% block H2_Description %}

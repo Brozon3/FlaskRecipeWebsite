@@ -10,6 +10,8 @@
 {% endblock %}
 
 {% block H1_Content %}
+    Complete each field to add your recipe to the database! Each field is required, including the picture so that you
+    can show off what you created!
 {% endblock %}
 
 {% block H2_Description %}
@@ -24,6 +26,9 @@
                     <h3>Recipe Information</h3>
                     <table>
                         {{ render_field(form.recipe_name, size=20) }}
+                        {{ render_field(form.recipe_ingredients) }}
+                        {{ render_field(form.recipe_instructions) }}
+                        {{ render_field(form.recipe_serving_size) }}
                         {{ render_field(form.recipe_picture) }}
                     </table>
                 </div>
