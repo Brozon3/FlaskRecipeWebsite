@@ -12,7 +12,8 @@
 
 
 {% block H1_Description %}
-    Add recipes to the book by filling out the form below!
+    <h1>Add recipes to the book by filling out the form below!</h1>
+    <br>
 {% endblock %}
 
 {% block H1_Content %}
@@ -23,11 +24,11 @@
             {{ form.recipe_name.label() }}
         </div>
         <div class="form-floating mb-3">
-            {{ form.recipe_ingredients(class="form-control", style="height:100px") }}
+            {{ form.recipe_ingredients(class="form-control", style="height:200px") }}
             {{ form.recipe_ingredients.label() }}
         </div>
         <div class="form-floating mb-3">
-            {{ form.recipe_instructions(class="form-control", style="height:100px") }}
+            {{ form.recipe_instructions(class="form-control", style="height:200px") }}
             {{ form.recipe_instructions.label() }}
         </div>
         <div class="mb3">

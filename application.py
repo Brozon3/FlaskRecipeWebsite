@@ -45,13 +45,11 @@ def add_recipe():
         return render_template("add_recipe.html", form=form)
 
 
-@app.route("/search_recipe", methods=["POST", "GET"])
-def search_recipe():
-    search = SearchForm(request.form)
-    if request.method == "POST":
-        return display_recipe(search)
-
-    return render_template("search_recipe.html", form=search)
+@app.route("/recipes", methods=["POST", "GET"])
+def recipes():
+    recipes = pd.read_csv("static/data_dir/recipes.csv", dtype={"name": str})
+    recipes = recipes.set_index("name")
+    return render_template("recipes.html", recipes=recipes)
 
 
 @app.route("/display_recipe")
