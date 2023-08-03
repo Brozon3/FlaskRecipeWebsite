@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 
+{% block messages %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endblock %}
+
 {% block H1_Description %}
-    <h1></h1>
+    <h4 class="font-weight-bold mb-0">Recipe Name: <span class="text-muted font-weight-normal">{{ recipe["name"] }}</span></h4>
     <br>
 {% endblock %}
 
@@ -10,13 +19,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="{{ url_for("static", filename='image_dir/{}'.format(recipe.recipe_picture)) }}" alt="">
+                    <img src="{{ url_for("static", filename='image_dir/{}'.format(recipe.picture)) }}" alt="" width="300">
                 </div>
                 <div class="col-md-8">
-                    <h4 class="font-weight-bold mb-0">Recipe Name: <span class="text-muted font-weight-normal">{{ recipe.recipe_name }}</span></h4>
-                    <h4 class="font-weight-bold mb-0">Recipe Ingredients: <span class="text-muted font-weight-normal">{{ recipe.recipe_ingredients }}</span></h4>
-                    <h4 class="font-weight-bold mb-0">Recipe Instructions: <span class="text-muted font-weight-normal">{{ recipe.recipe_instructions }}</span></h4>
-                    <h4 class="font-weight-bold mb-0">Recipe Serving Size: <span class="text-muted font-weight-normal">{{ recipe.recipe_serving_size }}</span></h4>
+                    <h4 class="font-weight-bold mb-0">Recipe Ingredients: <span class="text-muted font-weight-normal">{{ recipe.ingredients }}</span></h4>
+                    <h4 class="font-weight-bold mb-0">Recipe Instructions: <span class="text-muted font-weight-normal">{{ recipe.instructions }}</span></h4>
+                    <h4 class="font-weight-bold mb-0">Recipe Serving Size: <span class="text-muted font-weight-normal">{{ recipe["serving size"] }}</span></h4>
                 </div>
             </div>
         </div>

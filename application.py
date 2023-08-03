@@ -36,8 +36,9 @@ def add_recipe():
             form.recipe_picture.data.save(os.path.join(app.config["SUBMITTED_IMG"] + picture_filename))
             df.loc[recipe_name] = [recipe_ingredients, recipe_instructions, recipe_serving_size, picture_filename]
             df.to_csv("static/data_dir/recipes.csv")
+            recipe = df.loc[recipe_name]
             flash("Your recipe was added to the cookbook!")
-            return redirect(url_for("add_recipe"))
+            return render_template("view_recipe.html", recipe=recipe)
         else:
             flash("A recipe with that name already exists! \nTry something funnier.")
             return redirect(url_for("add_recipe"))
@@ -52,10 +53,11 @@ def recipes():
     return render_template("recipes.html", recipes=recipes)
 
 
-@app.route("/display_recipe")
-def display_recipe(search):
-    df = pd.read_csv("static/data_dir/recipes.csv")
-    recipe = df.iloc[0]
+@app.route("/display_recipe/<recipe_name>")
+def display_recipe(recipe_name):
+    recipes = pd.read_csv("static/data_dir/recipes.csv", dtype={"name": str})
+    recipes = recipes.set_index("name")
+    recipe = recipes.loc[recipe_name]
     return render_template("view_recipe.html", recipe=recipe)
 
 

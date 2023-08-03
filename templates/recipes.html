@@ -19,11 +19,11 @@
         <div class="row row-cols-3 ">
             {% for name, row in recipes.iterrows() %}
                 <div class="card m-auto" style="width: 18rem;">
-                    <img src="{{ url_for("static", filename='image_dir/{}'.format(row["picture"])) }}" class="card-img-top" alt="..." width="300" height="300">
+                    <img src="{{ url_for("static", filename='image_dir/{}'.format(row["picture"])) }}" class="card-img-top" alt="..." width="200" height="150">
                     <div class="card-body">
                         <h5 class="card-title"> {{ row["name"]|safe }} </h5>
                         <p class="card-text">Serves: {{ row["serving size"]|safe }}</p>
-                        <a href="#" class="btn btn-dark">Go To Recipe</a>
+                        <a href="{{ url_for("display_recipe", recipe_name=row["name"]) }}" class="btn btn-dark">Go To Recipe</a>
                     </div>
                 </div>
             {% endfor %}
