@@ -26,8 +26,9 @@
                     <a class="nav-link active" href={{ url_for("recipes") }}>Recipes</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form method="POST" action="{{ url_for("search") }}" class="d-flex">
+                {{ form.hidden_tag() }}
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
                 <button class="btn btn-outline-light bg-light text-dark" type="submit">Search</button>
             </form>
         </div>

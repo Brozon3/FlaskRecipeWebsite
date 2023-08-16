@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, url_for, render_template, request, flash
+from flask import Flask, redirect, url_for, render_template, flash
 from forms import RecipeForm, SearchForm
 import pandas as pd
 from werkzeug.utils import secure_filename
@@ -9,6 +9,12 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = "aon123xzdondfipubasdfgibf45234uasdfbipSBDFPIUBdsf"
 app.config['SUBMITTED_DATA'] = os.path.join("static", "data_dir", "")
 app.config['SUBMITTED_IMG'] = os.path.join("static", "image_dir", "")
+
+
+@app.context_processor
+def base():
+    form = SearchForm()
+    return dict(form=form)
 
 
 @app.route('/')
@@ -59,6 +65,21 @@ def display_recipe(recipe_name):
     recipes = recipes.set_index("name")
     recipe = recipes.loc[recipe_name]
     return render_template("view_recipe.html", recipe=recipe)
+
+
+@app.route("/search", methods=["POST"])
+def search():
+    form = SearchForm()
+    if form.validate_on_submit():
+        searchString = form.search.data
+        recipes = pd.read_csv("static/data_dir/recipes.csv", dtype={"name": str})
+        recipes = recipes.set_index("name")
+        if searchString in recipes.index:
+            recipe = recipes.loc[searchString]
+            return render_template("view_recipe.html", form=form, recipe=recipe)
+        else:
+            flash("The recipe you looked for does not exist, try something else.")
+            return redirect(url_for("hello_world"))
 
 
 if __name__ == "__main__":
